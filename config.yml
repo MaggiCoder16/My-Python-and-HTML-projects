@@ -106,12 +106,12 @@ opening_books:
         names:
         - rbsmall
 
-    standard_white_yuki_1324:
+    standard_white_nnue_drift:
         selection: best_move
         names:
         - rbsmall
 
-    standard_black_yuki_1324:
+    standard_black_nnue_drift:
         selection: best_move
         names:
         - rbsmall
