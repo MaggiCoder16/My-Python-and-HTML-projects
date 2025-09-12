@@ -88,7 +88,7 @@ opening_books:
   books:
 
     standard_white_rated:
-      selection: best_move
+      selection: weighted_random
       allow_repetitions: true
       names:
         - white
@@ -96,7 +96,7 @@ opening_books:
         - Optimus4
 
       standard_black_rated:
-      selection: best_move
+      selection: weighted_random
       allow_repetitions: true
       names:
         - black
@@ -104,7 +104,7 @@ opening_books:
         - Optimus4
 
     standard_white_casual:
-      selection: best_move
+      selection: weighted_random
       allow_repetitions: true
       names:
         - white
@@ -112,7 +112,7 @@ opening_books:
         - Optimus4
 
       standard_black_casual:
-      selection: best_move
+      selection: weighted_random
       allow_repetitions: true
       names:
         - black
@@ -120,13 +120,13 @@ opening_books:
         - Optimus4
 
       standard_white_human:
-      selection: best_move
+      selection: weighted_random
       allow_repetitions: true
       names:
         - white
 
       standard_black_human:
-      selection: best_move
+      selection: weighted_random
       allow_repetitions: true
       names:
         - black
@@ -134,7 +134,7 @@ opening_books:
         - Optimus4
   
     standard_white_bot:
-      selection: best_move
+      selection: weighted_random
       allow_repetitions: true
       names:
         - white
@@ -142,13 +142,13 @@ opening_books:
         - Optimus4
 
     standard_black_bot:
-      selection: best_move
+      selection: weighted_random
       allow_repetitions: true
       names:
         - black
         
     standard_white_tournament:
-      selection: best_move
+      selection: weighted_random
       allow_repetitions: true
       names:
         - white
@@ -156,7 +156,7 @@ opening_books:
         - BackupBook
 
     standard_black_tournament:
-      selection: best_move
+      selection: weighted_random
       allow_repetitions: true
       names:
         - black
@@ -184,6 +184,7 @@ opening_books:
       allow_repetitions: true
       names:
         - kothblack
+
     kingofthehill_white:
       selection: best_move
       names:
@@ -192,13 +193,25 @@ opening_books:
     antichess_white:
       selection: best_move
       names:
-        - antiw
+        - noobanti
+        - antichess
 
     antichess_black:
       selection: best_move
       allow_repetitions: true
       names:
-        - anti
+        - antichess
+
+    threecheck_white:
+      selection: best_move
+      names:
+        - threecheck
+
+    threecheck_black:
+      selection: best_move
+      allow_repetitions: true
+      names:
+        - threecheck      
         
 #   'antichess', 'atomic', 'chess960', 'crazyhouse', 'horde', 'kingofthehill', 'racingkings' and '3check' as well.
 #   Append '_white', '_black' or '_human' to use the engine only as the specific color or against humans.
@@ -348,6 +361,8 @@ books:                                    # Names of the opening books (to be us
   kothblack: "./engines/koth_black.bin"
   black: "./engines/std_black.bin"
   white: "./engines/std_white.bin"
-  anti: "./engines/antichess_book.bin"
-  antiw: "./engines/antiw.bin"
+  antichess: "./engines/anti_book.bin"
+  noobanti: "./engines/noobanti.bin"
+  threecheck: "./engines/threecheck_book.bin"
+
 
