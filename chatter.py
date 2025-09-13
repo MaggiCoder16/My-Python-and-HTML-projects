@@ -51,10 +51,6 @@ class Chatter:
 
         user_room_key = f"{chat_message.username}_{chat_message.room}"
 
-        if chat_message.text.lower().startswith("!use"):
-            await self._handle_use_command(chat_message)
-            return
-
         if user_room_key in self.pending_use_requests:
             await self._handle_use_explanation(chat_message)
             return
@@ -285,22 +281,26 @@ class Chatter:
         user_room_key = f"{chat_message.username}_{chat_message.room}"
         self.pending_use_requests[user_room_key] = chat_message.room
 
+        parts = chat_message.text.strip().split(None, 1)  
+        if len(parts) > 1 and parts[1].strip():
+            cmd = parts[1].lower().lstrip('!').strip()
+            cmd = '!' + cmd
+            explanation = self._get_command_explanation(cmd, chat_message.room)
+            await self.api.send_chat_message(self.game_info.id_, chat_message.room, explanation)
+            return
+
         if chat_message.room == 'player':
             commands_list = 'cpu, draw, eval, motor, name, printeval, ram, ping, roast, destroy, quotes'
         else:
             commands_list = 'cpu, draw, eval, motor, name, printeval, pv, ram, ping, roast, destroy, quotes'
 
-        message = ("Supported commands: !cpu, !draw, !eval, !motor, !name, !printeval, !ram, !ping, !roast, !destroy, !quotes. Which command would you like me to explain?")
+        message1 = f"Available commands: {commands_list}."
+        message2 = "Which command would you like me to explain?"
+        print(f"[DEBUG] !use triggered by {chat_message.username} in {chat_message.room} -> {repr(message)}")
 
+        await self.api.send_chat_message(self.game_info.id_, chat_message.room, message1)
+        await self.api.send_chat_message(self.game_info.id_, chat_message.room, message2)
 
-        print(f"[DEBUG] !use triggered by {chat_message.username} in {chat_message.room}")
-        print(f"[DEBUG] Message being sent:\n{message}")
-
-        await self.api.send_chat_message(
-            self.game_info.id_,
-            chat_message.room,
-            message.strip()
-        )
 
     async def _handle_use_explanation(self, chat_message: Chat_Message) -> None:
         user_room_key = f"{chat_message.username}_{chat_message.room}"
@@ -336,3 +336,4 @@ class Chatter:
             return '!pv: This command is only available in spectator chat.'
         else:
             return f'Unknown command: {command}. Type !help to see all available commands.'
+
