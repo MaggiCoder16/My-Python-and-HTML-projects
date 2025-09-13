@@ -1,4 +1,4 @@
-name: Build Variant Book
+name: colour specific variant book
 
 on:
   workflow_dispatch:
@@ -19,11 +19,11 @@ jobs:
         run: pip install chess requests
 
       - name: Run filter_and_build.py
-        run: python filter_and_build.py
+        run: python color-variant.py
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: book-artifacts
           path: |
-            horde.bin
+            horde_black.bin
